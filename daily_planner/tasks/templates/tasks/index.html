@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'tasks/base.html' %}
 
-</body>
-</html>
+{% block body %}
+<div class="header">
+
+    <div class="task_create">
+        <a href="#">task create</a>
+    </div>
+
+    <div class="profile">
+        <ul class="profile_list">
+            {% if not user.is_authenticated %}
+                <li><a href="{% url 'login' %}" class="sign_in">sign in</a></li>
+                <li><a href="{% url 'signup' %}" class="sign_up">sign up</a></li>
+            {% else %}
+                <li><div class="profile_login">{{ user.username|default:'Guest' }}</div></li>
+                <li><a href="{% url 'logout' %}" class="profile_exit">exit</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+</div>
+
+<div class="tasks">
+    {% if user.is_authenticated %}
+        {% if tasks|length > 0 %}
+            {% for task in tasks %}
+                <div class="task">
+                    <div class="taks_title">{{ task.title }}</div>
+                    <div class="taks_content">{{ task.content }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="task_empty">Пока что тут тишина, создайте задачу...</div>
+        {% endif %}
+    {% else %}
+          <div class="task_empty">Пусто...</div>
+    {% endif %}
+
+</div>
+{% endblock %}
