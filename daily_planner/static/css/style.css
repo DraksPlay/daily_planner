@@ -27,10 +27,13 @@ li {
     justify-content: center;
 }
 
+.profile_login {
+    font-weight: bold;
+}
+
 .tasks {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .task {
@@ -38,14 +41,50 @@ li {
     background: #eaeaea;
     padding: 20px;
     margin-top: 30px;
+    word-wrap: break-word;
+    position: relative;
 }
+
+
+.task_mark {
+    opacity: 0;
+    position: absolute;
+    left: -10%;
+    top: 40%;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 5;
+    border-radius: 50px;
+    border: solid black;
+    width: 25px;
+    height: 25px;
+}
+
+.task_mark_shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -10%;
+    top: 0;
+}
+
+.task:hover .task_mark {
+    opacity: 1;
+}
+
+.opacity_enable {
+    opacity: 1;
+}
+
 
 .task_empty {
     margin-top: 30px;
     color: #9c9c9c;
+    display: flex;
+    justify-content: center;
 }
 
-.taks_title {
+.task_title {
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -53,6 +92,19 @@ li {
 .task_create {
     display: inherit;
     align-items: center;
+    padding: 0;
+}
+
+.task_create a {
+    border: solid black;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+.task_create a:hover {
+    background: black;
+    color: white;
 }
 
 .header {
@@ -63,3 +115,39 @@ li {
     border-radius: 0 0 20px 20px;
 }
 
+.toolbar {
+    display: none;
+    position: fixed;
+    top: 50vh;
+    left: 0;
+    background: #eaeaea;
+    border-radius: 0 20px 20px 0;
+}
+
+.toolbar * {
+    margin: 10px;
+    background: black;
+    border-radius: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+
+}
+
+.delete_tasks {
+    background: red;
+}
+
+.edit_task {
+    display: none;
+    background: #466FD5;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}

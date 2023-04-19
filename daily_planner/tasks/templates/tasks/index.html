@@ -1,11 +1,19 @@
 {% extends 'tasks/base.html' %}
 
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
 {% block body %}
 <div class="header">
 
+    {% if user.is_authenticated %}
     <div class="task_create">
-        <a href="#">task create</a>
+        <a href="create_task">task create</a>
     </div>
+    {% endif %}
 
     <div class="profile">
         <ul class="profile_list">
@@ -24,12 +32,17 @@
 <div class="tasks">
     {% if user.is_authenticated %}
         {% if tasks|length > 0 %}
+
             {% for task in tasks %}
-                <div class="task">
-                    <div class="taks_title">{{ task.title }}</div>
-                    <div class="taks_content">{{ task.content }}</div>
+                <div class="task" id="{{ task.id }}">
+                    <div class="task_mark"></div>
+                    <div class="task_mark_shadow"></div>
+                    <div class="task_title">{{ task.title }}</div>
+                    <div class="task_content">{{ task.content }}</div>
                 </div>
+
             {% endfor %}
+
         {% else %}
             <div class="task_empty">Пока что тут тишина, создайте задачу...</div>
         {% endif %}
@@ -38,4 +51,18 @@
     {% endif %}
 
 </div>
+
+<div class="toolbar">
+
+    <div class="delete_tasks">
+        Del
+    </div>
+
+    <div class="edit_task">
+        Edit
+    </div>
+
+</div>
+
+<script src="{% static 'scripts/script.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
